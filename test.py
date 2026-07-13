@@ -1,0 +1,25 @@
+g=[0,6,-2,-1,4,5]
+b1=0.9
+b2=0.999
+v=[0]
+m=[0]
+mp=[0]
+vo=[0]
+vop=[0]
+mvop=[1]
+for n in range(len(g)-1):
+    vn=b1*v[n]+g[n+1]
+    v.append(vn)
+    mn=(b1*m[n]+(1-b1)*g[n+1])
+    m.append(mn)
+    mp.append(mn/(1-b1**(n+1)))
+    von=(b2*vo[n]+(1-b2)*g[n+1]**2)
+    vo.append(von)
+    vop.append(von/(1-b2**(n+1)))
+    mvop.append((mn/(1-b1**(n+1)))/(von/(1-b2**(n+1)))**(1/2))
+print(v)
+print(m)
+print(mp)
+print(vo)
+print(vop)
+print(mvop)
