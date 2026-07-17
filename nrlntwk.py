@@ -162,3 +162,36 @@ print("정확도:", (predicted_final==y_test).sum().item()/len(y_test))
 
 cm=confusion_matrix(y_test.numpy(),predicted_final.numpy())
 print(cm)
+
+def train_with_lr(lr,epochs=20):
+    model=DigitClassifier()
+    optimizer=torch.optim.Adam(model.parameters(),lr=lr)
+    loss_history=[]
+
+    for epoch in range(epochs):
+        total_loss = 0 
+        for batch_X, batch_y in train_loader:
+            optimizer.zero_grad()
+            output=model(batch_X)
+            loss=criterion(output,batch_y)
+            loss.backward()
+            optimizer.step()
+            total_loss+=loss.item()
+        loss_history.append(total_loss/len(train_loader))
+
+    model.eval()
+    with torch.no_grad():
+        test_output=model(X_test)
+        predicted=torch.argmax(test_output,dim=1)
+        accuracy=(predicted==y_test).sum().item()/len(y_test)
+    
+    return loss_history, accuracy
+
+# lr_values=[0.1,0.01,0.005,0.004,0.003,0.002,0.0015,0.00125,0.001,0.0001]
+# results_lr={}
+
+# for lr in lr_values:
+#     loss_history, accuracy=train_with_lr(lr)
+#     results_lr[lr]={"loss_history": loss_history, "accuracy": accuracy}
+#     print(f"lr={lr}: 정확도={accuracy:.4f}")
+#     print(results_lr[lr]["loss_history"])

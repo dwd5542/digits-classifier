@@ -70,3 +70,37 @@ for i in range(20):
 mean_cnn=statistics.mean(accuracies_cnn)
 std_cnn=statistics.stdev(accuracies_cnn)
 print(f"평균: {mean_cnn:.4f}, 표준편차: {std_cnn:.4f}")
+
+# model_cnn_final=DigitCNN()
+# optimizer_cnn=torch.optim.Adam(model_cnn_final.parameters(),lr=0.001)
+
+# for epoch in range(20):
+#     for batch_X,batch_y in train_loader_cnn:
+#         optimizer_cnn.zero_grad()
+#         output=model_cnn_final(batch_X)
+#         loss=criterion(output,batch_y)
+#         loss.backward()
+#         optimizer_cnn.step()
+
+# model_cnn_final.eval()
+# with torch.no_grad():
+#     test_output=model_cnn_final(X_test_img)
+#     predicted=torch.argmax(test_output,dim=1)
+#     accuracy=(predicted==y_test_img).sum().item()/len(y_test_img)
+
+# print("정확도:",accuracy)
+
+# filters = model_cnn_final.conv.weight.detach()
+# print(filters.shape)
+
+# fig, axes = plt.subplots(2, 4, figsize=(10, 5))
+
+# for i in range(8):
+#     row = i // 4
+#     col = i % 4
+#     axes[row, col].imshow(filters[i][0], cmap='gray')
+#     axes[row, col].set_title(f"filter {i}")
+#     axes[row, col].axis('off')
+
+# plt.tight_layout()
+# plt.show()
