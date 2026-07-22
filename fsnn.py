@@ -91,8 +91,8 @@ optimizer=torch.optim.Adam(model.parameters(),lr=0.001)
 configs={
     "single_32":lambda:FashionClassifier(hidden_size=32),
     "single_64": lambda:FashionClassifier(hidden_size=64),
-    "deep_32_32":lambda:FashionClassifier(),
-    "deep_64_64":lambda:FashionClassifier(hidden_size=64),
+    "deep_32_32":lambda:FashionClassifierDeep(hidden_size=32),
+    "deep_64_64":lambda:FashionClassifierDeep(hidden_size=64),
 }
 
 

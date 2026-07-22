@@ -103,9 +103,7 @@ class DigitClassifierWideLeaky(nn.Module):
         return x
 
 
-model=DigitClassifier()
 criterion=nn.CrossEntropyLoss()
-optimizer=torch.optim.Adam(model.parameters(),lr=0.001)
 
 train_dataset=TensorDataset(X_train, y_train)
 train_loader=DataLoader(train_dataset, batch_size=32, shuffle=True)
@@ -113,6 +111,7 @@ train_loader=DataLoader(train_dataset, batch_size=32, shuffle=True)
 def train_and_evaluate(model_class):
     model = model_class()
     optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    criterion=nn.CrossEntropyLoss()
 
     for epoch in range(20):
         for batch_X, batch_y in train_loader:
